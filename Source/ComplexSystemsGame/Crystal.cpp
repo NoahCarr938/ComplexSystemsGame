@@ -43,8 +43,6 @@ void ACrystal::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	if (!PlayerCharacter)
 		return;
 
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "PlayerCharacter");
-
 	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
 	AComplexPlayerState* PlayerState = PlayerController != NULL ? PlayerController->GetPlayerState<AComplexPlayerState>() : NULL;
 	if (!PlayerState) return;

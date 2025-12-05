@@ -3,12 +3,12 @@
 
 #include "ComplexPlayerState.h"
 
-int AComplexPlayerState::GetXP()
+float AComplexPlayerState::GetXP()
 {
 	return XP;
 }
 
-bool AComplexPlayerState::SetXP(int XPAmount)
+bool AComplexPlayerState::SetXP(float XPAmount)
 {
 	XP = XPAmount;
 	return true;

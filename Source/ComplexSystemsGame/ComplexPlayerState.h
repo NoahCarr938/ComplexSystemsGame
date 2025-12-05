@@ -16,8 +16,10 @@ private:
 	int XP = 0;
 
 public:
-	int GetXP();
-	bool SetXP(int XPAmount);
+	UFUNCTION(BlueprintCallable)
+	float GetXP();
+	UFUNCTION(BlueprintCallable)
+	bool SetXP(float XPAmount);
 
 	UFUNCTION(BlueprintCallable)
 	bool AddXP(int XPAmount);
