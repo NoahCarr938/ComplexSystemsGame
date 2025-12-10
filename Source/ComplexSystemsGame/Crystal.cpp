@@ -5,6 +5,7 @@
 
 #include "GameFramework/Character.h"
 #include "ComplexPlayerState.h"
+#include "Components/SphereComponent.h"
 #include "GameFramework/RotatingMovementComponent.h"
 
 // Sets default values
@@ -15,12 +16,25 @@ ACrystal::ACrystal()
 
 	RootScene = CreateDefaultSubobject<USceneComponent>(TEXT("Root"));
 	RootComponent = RootScene;
+	
 	Crystal = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Crystal"));
 	Crystal->SetupAttachment(RootComponent);
 	Crystal->OnComponentBeginOverlap.AddDynamic(this, &ACrystal::BeginOverlap);
+	
 	RotatingMovementComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("RotatingMovement"));
 
+	// This sphere collision will be used to collect crystals
+	SphereCollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereCollision"));
+	SphereCollisionComponent->InitSphereRadius(50.f);
+	SphereCollisionComponent->SetupAttachment(Crystal);
+
+	// This sphere collision will determine how far the crystals can be pulled towards the player
+	SphereCollisionRange = CreateDefaultSubobject<USphereComponent>(TEXT("SphereRange"));
+	SphereCollisionRange->InitSphereRadius(200.f);
+	SphereCollisionRange->SetupAttachment(RootScene);
+	SphereCollisionRange->OnComponentBeginOverlap.AddDynamic(this, &ACrystal::SphereRangeBeginOverlap);
 }
+
 
 // Called when the game starts or when spawned
 void ACrystal::BeginPlay()
@@ -51,4 +65,41 @@ void ACrystal::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "+5 XP");
 	Destroy();
 }
+
+void ACrystal::SphereRangeBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	ACharacter* PlayerCharacter = Cast<ACharacter>(OtherActor);
+	//*OtherActor->GetName();
+	if (!PlayerCharacter)
+		return;
+	
+	if (OtherActor == PlayerCharacter)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "Sphere Overlap");
+	}
+}
+
+void ACrystal::SphereRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
+	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	ACharacter* PlayerCharacter = Cast<ACharacter>(OtherActor);
+	//*OtherActor->GetName();
+	if (!PlayerCharacter)
+		return;
+	
+	if (OtherActor == PlayerCharacter)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "Sphere End Overlap");
+	}
+}
+
+void ACrystal::PullTowardsTarget()
+{
+	return;
+	/*ACharacter* PlayerCharacter;
+	PlayerCharacter->AddActorLocalOffset();*/
+}
+
+
 

@@ -14,6 +14,22 @@ class COMPLEXSYSTEMSGAME_API AComplexPlayerState : public APlayerState
 	GENERATED_BODY()
 private:
 	int XP = 0;
+public:
+	UPROPERTY(BlueprintReadWrite)
+	int strengthLevel = 0;
+	UPROPERTY(BlueprintReadWrite)
+	int perceptionLevel = 0;
+	UPROPERTY(BlueprintReadWrite)
+	int enduranceLevel = 0;
+	UPROPERTY(BlueprintReadWrite)
+	int charismaLevel = 0;
+	UPROPERTY(BlueprintReadWrite)
+	int intelligenceLevel = 0;
+	UPROPERTY(BlueprintReadWrite)
+	int agilityLevel = 0;
+	UPROPERTY(BlueprintReadWrite)
+	int luckLevel = 0;
+	
 
 public:
 	UFUNCTION(BlueprintCallable)
@@ -23,6 +39,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	bool AddXP(int XPAmount);
+
+	//UFUNCTION(BlueprintCallable)
+	
 
 	UPROPERTY(BlueprintAssignable)
 	FOnXPUpdateDispatcher OnXpUpdateDispatcher;

@@ -24,6 +24,14 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<class URotatingMovementComponent> RotatingMovementComponent;
 
+	// This sphere collision will be used to collect crystals
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TObjectPtr<class USphereComponent> SphereCollisionComponent;
+
+	// This sphere collision will determine how far the crystals can be pulled towards the player
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	TObjectPtr<class USphereComponent> SphereCollisionRange;
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -41,4 +49,21 @@ public:
 		bool bFromSweep,
 		const FHitResult& SweepResult);
 
+	UFUNCTION()
+	void SphereRangeBeginOverlap(UPrimitiveComponent* OverlappedComponent,
+		AActor* OtherActor,
+		UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex,
+		bool bFromSweep,
+		const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void SphereRangeEndOverlap(UPrimitiveComponent* OverlappedComponent,
+		AActor* OtherActor,
+		UPrimitiveComponent* OtherComp,
+		int32 OtherBodyIndex);
+
+	UFUNCTION()
+	void PullTowardsTarget();
+	
 };
