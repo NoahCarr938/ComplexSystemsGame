@@ -20,6 +20,16 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	TObjectPtr<UStaticMeshComponent> MeshComponent;
 
+	struct item
+	{
+		FText ItemName;
+		bool bItemStackable;
+		int ItemQuantity;
+		UTexture2D ItemImage;
+		UStaticMesh ItemMesh;
+		
+	};
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
