@@ -62,7 +62,7 @@ void ACrystal::BeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	if (!PlayerState) return;
 
 	PlayerState->AddXP(5);
-	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "+5 XP");
+	//GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "+5 XP");
 	Destroy();
 }
 
