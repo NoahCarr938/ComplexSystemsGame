@@ -74,10 +74,10 @@ void ACrystal::SphereRangeBeginOverlap(UPrimitiveComponent* OverlappedComponent,
 	if (!PlayerCharacter)
 		return;
 	
-	if (OtherActor == PlayerCharacter)
+	/*if (OtherActor == PlayerCharacter)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "Sphere Overlap");
-	}
+	}*/
 }
 
 void ACrystal::SphereRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
@@ -88,10 +88,10 @@ void ACrystal::SphereRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, A
 	if (!PlayerCharacter)
 		return;
 	
-	if (OtherActor == PlayerCharacter)
+	/*if (OtherActor == PlayerCharacter)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, "Sphere End Overlap");
-	}
+	}*/
 }
 
 void ACrystal::PullTowardsTarget()
